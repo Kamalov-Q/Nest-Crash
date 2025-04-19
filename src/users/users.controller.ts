@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Query 
 import { CreateUserDto } from 'src/dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { CreateUserType } from 'src/utils/types';
+import { UsersPipe } from './users.pipe';
 
 @Controller('users')
 export class UsersController {
@@ -53,8 +54,8 @@ export class UsersController {
     }
 
     @Post()
-    createUser(@Body() userData: CreateUserDto) {
-        return this?.userServices?.createUser(userData as CreateUserType)
+    createUser(@Body(UsersPipe) userData: CreateUserDto) {
+        return this?.userServices?.createUser(userData)
     }
 
     @Get(':id/:postId')
